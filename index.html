@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Trivia Game</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+</head>
+<body>
 
+
+     <div id="Game">
+      <h1 id="welcome"> Welcome To The Sports Trivia Game!!</h1>
+        <div id="directions">
+            <h2> Answer as many questions correctly as you can within the time limit. Each time you get an answer correct your current score will be updated.<br>Click the start button when you are ready to play.</h2>
+        </div>
+        
+        <div id="scoreboard">
+            <div id="previousScore">
+                <h1 id= "PS"> Previous Score</h1>
+                <p id= "lastScore"> </p>
+            </div>
+            <div id="clock">
+                <h1 id="TL"> Time Left</h1>
+                <p id= "currenttime"> </p>
+                <div id="display">2:00</div>
+            </div>
+            <div id="currentScore">
+                <h1 id= "CS"> Current Score</h1>
+                <p id= "userscore"> </p>
+            </div>
+        </div>
+         <div id="questions">
+                <p id="question1">Question goes here</p> 
+         </div>
+         <div id="answers" >
+                <div>
+				   <button class="answerchoice" id="buttonA"><h3>A</h3></button>
+			    </div>
+			    <div>
+				   <button class="answerchoice" id="buttonB"><h3>B</h3></button>
+			    </div>
+			    <div>
+				   <button class="answerchoice" id="buttonC"><h3>C</h3></button>
+			    </div>
+			    <div>
+				   <button class="answerchoice" id="buttonD"><h3>D</h3></button>
+			    </div>
+        </div>
+
+        <div id="gameStart">
+        <button id="start" type="button">Start</button>
+        </div>
+
+
+<script src="assets/javascript/app.js"></script>
+
+
+</body>
+</html>
