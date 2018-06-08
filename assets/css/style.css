@@ -22,7 +22,7 @@ h2 {
 h4 {
 	font-size: 30px;
 	color: red;
-	background-color: rgba(100, 200, 200, 0.6);
+	background-color:rgba(0, 0, 0, 0.71);
     text-align: center;
     width: 100%;
 }
@@ -118,7 +118,6 @@ h4 {
 }
 #questions{
     width:100%;
-    /* float: left; */
     background-color:rgba(54, 61, 52, 0.8);
     text-align: center;
 }
@@ -128,6 +127,8 @@ h4 {
     text-align: center;
     font-size: 30px;
     color:red;
+    background-color: rgba(0, 0, 0, 0.71);
+    text-align: center;
 }
 #answers{
     width: 100%;

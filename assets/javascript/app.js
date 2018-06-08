@@ -1,6 +1,5 @@
 $(document).ready(function(){ 
-
-   var questionArray =["Which Diamondback pitcher won the Cy Young Award in the National League for the Diamondbacks, for four consecutive years from 1999 through 2002?", 
+var questionArray =["Which Diamondback pitcher won the Cy Young Award in the National League for the Diamondbacks, for four consecutive years from 1999 through 2002?", 
                         "What year did the Arizona Diamondbacks win the World Series?", 
                         "Who had the winning hit in th Arizona Diamondbacks game 7 of the World Series?",
                         "Who was the winning pitcher for Arizona Diambacks game 7 or the World Series?",
@@ -26,7 +25,7 @@ $(document).ready(function(){
                       ["Luis Gonzalez","Paul Goldschmidt","Craig Counsell","Steve Finley"],
                       ["Curt Schilling","Randy Johnson","Brandon Webb","Byung-hyun Kim"],
                       ["Hank Arron", "Barry Bonds", "Babe Ruth","Willie Mays"],
-                      ["Álex Rodríguez","Barry Bonds","Mickey Mantle","Miguel Cabrera"],
+                      ["Álex Rodriguez","Barry Bonds","Mickey Mantle","Miguel Cabrera"],
                       ["Boston Red Sox", "St. Louis Cardinals", "New York Yankees","New York Giants"],
                       ["Cy Young", "Walter Johnson","Nolan Ryan","Greg Maddux"],
                       ["The Ohio State University", "The University of Alabama", "Notre Dame University", "Penn State University"],
@@ -63,25 +62,19 @@ $(document).ready(function(){
                          "Jack Nicklaus",
                          "Brazil",
                         ];
-   var userChoice ;
+ 
    var interval;
    var correct = 0;
    var wrong = 0;
-   var answerChosen=[];
-   var selectedQanswers=[];
    var index = Math.floor(Math.random()*questionArray.length);
 
 $('#start').click(function () {
+  setup();
   $('#display').text("1:00");
-  hideButton();
+  $(this).hide();
   countdown();
   displayQuestion();
   clear();
-
-  console.log(index);
-  
- 
- 
 });
 
 
@@ -105,25 +98,31 @@ function countdown() {
       if (minutes == 0 && seconds == 0){ clearInterval(interval);
       timeup();}
   }, 1000);
-}
-
+};
+function setup() {
+	index = 0;
+	$('#startButton').on('click', function() {
+		$(this).hide();
+	 	$('#display').text("1:00");
+  hideButton();
+  countdown();
+  loadQuestion(index);
+  clear();
+	});
+}		
 function answerCorrect() {
 	correct++;
-  $("#userscore").text(correct);
 	alert("Correct!");
-  displayQuestion();
+	$("#userscore").text( correct );
 	console.log("correct");
-}
+};
 
 function answerWrong() {
 	wrong++;
-  $("#badScore").text(wrong);
 	alert("Incorrect!");
-  displayQuestion();
+  $("#badScore").text( wrong);
 	console.log("wrong");
-}
-
-  function hideButton(){$("#start").hide();};
+};
 
   function timeup(){
     $("#start").show();
@@ -132,129 +131,98 @@ function answerWrong() {
     $("#buttonB").hide();
     $("#buttonC").hide();
     $("#buttonD").hide();
-
   };
 
-  function clear(){
+ function clear(){
    $("#buttonA").show();
     $("#buttonB").show();
     $("#buttonC").show();
     $("#buttonD").show();
     $("#badScore").empty();
     $("#userscore").empty();
-     correct =0;
-     console.log(correct);
-
-    //  var wrong = 0;
-    //  var answerChosen="";
-    //  var checkAnswer="";
-  };
-
-
+    correct=0;
+     wrong=0; };
+function end() {
+	$('#question1').html("<h4>You have answered all of the questions!! <br> If you any incorrect answers, try again and this time take your time.</h4>");
+	$("#badScore").text( wrong) ;
+	$("#userscore").text(correct );
+	 $("#start").show();
+    $("#buttonA").hide();
+    $("#buttonB").hide();
+    $("#buttonC").hide();
+    $("#buttonD").hide();
+    clearInterval(interval);
+	$('#display').text("0:00");
+}
 function displayQuestion() {
-	index = Math.floor(Math.random()*questionArray.length);
-for(var i = 0; i <= index; i++)
-	var question = questionArray[index];
-  
-		$("#question1").html("<h2>" + question + "</h2>");
-		// for(var i = 0; i <= index; i++)
- var selectedQanswers= answerArray[index];
- var checkAnswer = correctAnswers[index]
- 
- console.log(selectedQanswers);
- console.log(index); 
-
-
- $("#buttonA").text( selectedQanswers[0] );
- $("#buttonB").text( selectedQanswers[1] );
- $("#buttonC").text( selectedQanswers[2] );
- $("#buttonD").text( selectedQanswers[3] );
-//  var answerChosen = selectedQanswers[0];
- 
-
-    $(".answerchoice").click(function() {
-      if(this.id == 'buttonA') {
- 	answerChosen = selectedQanswers[0];
- } else if(this.id == 'buttonB') {
- 	answerChosen = selectedQanswers[1];
- } else if (this.id == 'buttonC') {
- 	answerChosen = selectedQanswers[2];
- } else if (this.id == 'buttonD') {
- 	answerChosen = selectedQanswers[3];
- } 
-
-       if (answerChosen == checkAnswer){ 
-         answerCorrect();
-        alert("NICE");
-         
-         }
-         else if (answerChosen != checkAnswer){
-         answerWrong();
-        ("NOT NICE")
-console.log (answerChosen);
- } 
- 	console.log (answerChosen);
-
-
-    });
-    console.log (answerChosen);
+ $("#question1").html( questionArray[index]);
+ $("#buttonA").text( answerArray[index][0] );
+ $("#buttonB").text( answerArray[index][1] );
+ $("#buttonC").text( answerArray[index][2] );
+ $("#buttonD").text( answerArray[index][3] );
 };
-console.log (answerChosen);
+ 
+setup ();
+    $(".answerchoice").click(function() {
+if(this.id == 'buttonA') {
+ 	answerChosen = "A";
+   
+ } else if(this.id == 'buttonB') {
+ 	answerChosen = "B";
+    
+ } else if (this.id == 'buttonC') {
+ 	answerChosen = "C";
+   
+ } else if (this.id == 'buttonD') {
+ 	answerChosen = "D";
+  
+ } 
+
+       if ((answerChosen == "A") && (answerArray[index][0]==correctAnswers[index]))
+       { 
+         answerCorrect();
+       ;
+         }
+         else if (answerChosen == "A"){
+         answerWrong();
+        }
+     
+            if ((answerChosen == "B") &&(answerArray[index][1]==correctAnswers[index]))
+       { 
+         answerCorrect();
+        ;
+         }
+         else if (answerChosen == "B"){
+         answerWrong();
+        }
+
+            if ((answerChosen == "C") && (answerArray[index][2]==correctAnswers[index]))
+       { 
+         answerCorrect();
+        ;
+         }
+         else if (answerChosen == "C"){
+         answerWrong();
+       }
+
+         if ((answerChosen == "D") && (answerArray[index][3]==correctAnswers[index]))
+       { 
+         answerCorrect();
+     
+         }
+         else if (answerChosen == "D"){
+         answerWrong();}
+ $("#question1").text('');
+ $("#buttonA").text('');
+ $("#buttonB").text('');
+ $("#buttonC").text('');
+ $("#buttonD").text('');
+ index++;
+ if (index < questionArray.length) {
+ 	displayQuestion(index);
+ } else {
+ 	$(".answerchoice").hide();
+ 	end();
+    }
 });
-console.log (answerChosen);
-
-      //  });
-    // });
-    // $("#buttonB").click(function () {
-    //   var userChoice=selectedQanswers[1];
-    //    if (userChoice == correctAnswers[index]){ 
-    //      $("#userscore").text(correct++);
-    //      console.log("Correct");
-    //        $(userChoice).val(null);
-    //      $(index).val(0);
-    //      nextQuestion();
-    //      }
-    //     else{
-    //      $("#badScore").text(wrong++);
-    //      console.log("Wrong");
-    //        $(userChoice).val(0);
-    //      $(index).val(0);
-    //      nextQuestion();
-    //      };
-    // });
-    // $("#buttonC").click(function () {
-    //   var userChoice=selectedQanswers[2];
-    //    if (userChoice == correctAnswers[index]){ 
-    //      $("#userscore").text(correct++);
-    //      console.log("Correct");
-    //        $(userChoice).val(null);
-    //      $(index).val(0);
-    //      nextQuestion();
-    //      }
-    //   else{
-    //      $("#badScore").text(wrong++);
-    //      console.log("Wrong");
-    //       $(userChoice).val(0);
-    //      $(index).val(0);
-    //      nextQuestion();
-    //      };
-    // });
-    // $("#buttonD").click(function () {
-    //   var userChoice=selectedQanswers[3];
-    //    if (userChoice == correctAnswers[index]){ 
-    //      $("#userscore").text(correct++);
-    //      console.log("Correct");
-    //      $(userChoice).val(null);
-    //      $(index).val(0);
-    //      nextQuestion();
-    //      }
-    //     else{
-    //      $("#badScore").text(wrong++);
-    //      console.log("Wrong");
-    //        $(userChoice).val(null);
-    //      $(index).val(0);
-    //      nextQuestion();
-    //      };
-    // });
-
-// };
+});
