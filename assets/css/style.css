@@ -16,8 +16,9 @@ h2 {
 	font-size: 22px;
 	color: blue;
 	background-color: rgba(100, 200, 200, 0.6);
-    text-align: center;
-    width: 100%;
+	text-align: center;
+	width: 100%;
+	margin: 0%;
 }
 h4 {
 	font-size: 30px;
@@ -31,22 +32,19 @@ h4 {
     border:0%;
 }
 p{
-    padding:0%;
-    margin:0%;
-    border:0%;
-
+    line-height: inherit;
 }
 
 
 .answerchoice{
     font-size: 22px;
-	color: red;
-	background-color: rgba(0, 0, 0, 0.71);
+    color: red;
+    background-color: rgba(0, 0, 0, 0.71);
     text-align: center;
     width: 100%;
     padding:0%;
     margin:0%;
-    border:0%;
+    line-height: 25px;
 }
 #directions{
      width:100%;
@@ -109,33 +107,33 @@ p{
 }
 #display{
     text-align: center;
-    padding:73px;
-    padding-top:10px;
+    padding: 10%;
+    padding-top: 10%;
     font-size: 500%;
     color: white;
     border-left-style: solid;
     border-right-style: solid;
     border-color: white;
     border-width: 5px;
-
 }
 #currentScore{
-      width:33%;
-      float:left;
-      height:5%;
+     width:33%;
+    float:left;
+    height:20%;
 }
 #userscore{
      text-align: center;
-    padding:73px;
-    font-size: 500%;
-    color: green;
+     padding: 10%;
+     font-size: 500%;
+     color: green;
 }
 #badScore{
      text-align: center;
-    padding:73px;
-    padding-bottom: 10px;
-    font-size: 500%;
-    color: red;
+     padding: 10%;
+     padding-bottom: 10px;
+     font-size: 500%;
+     color: red;
+     margin: 0%;
 }
 
 #CS{
@@ -149,6 +147,7 @@ p{
 }
 #questions{
     width:100%;
+    line-height: 40px;
     background-color:rgba(54, 61, 52, 0.8);
     text-align: center;
     padding:0%;
@@ -159,13 +158,13 @@ p{
 #question1{
     width: 100%;
     text-align: center;
+    line-height: 30px;
     font-size: 30px;
     color:red;
     background-color: rgba(0, 0, 0, 0.71);
     text-align: center;
     padding:0%;
     margin:0%;
-    border-width:0%;
 }
 #answers{
     width: 100%;
@@ -175,14 +174,11 @@ p{
     background-color:rgba(54, 61, 52, 0.8);
     padding:0%;
     margin:0%;
-    border:0%;
 }
 
 #gameStart{
     padding-left:30%;
-    padding:0%;
     margin:0%;
-    border:0%;
 }
 #start{
     font-size: 50px;
@@ -192,5 +188,5 @@ p{
     color: white;
     padding: 20px;
     text-align: center;
-    margin-top:50px;
+    margin-top: 25px;
 }
