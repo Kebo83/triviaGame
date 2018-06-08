@@ -17,10 +17,27 @@ h2 {
 	color: blue;
 	background-color: rgba(100, 200, 200, 0.6);
     text-align: center;
-    width: 60%;
+    width: 100%;
+}
+h4 {
+	font-size: 30px;
+	color: red;
+	background-color: rgba(100, 200, 200, 0.6);
+    text-align: center;
+    width: 100%;
+}
+.answerchoice{
+    font-size: 22px;
+	color: red;
+	background-color: rgba(0, 0, 0, 0.71);
+    text-align: center;
+    width: 100%;
 }
 #directions{
-     padding-left:30%;
+     width:100%;
+}
+#SS{
+    color:red;
 }
 #welcome{
     text-align: center;
@@ -33,12 +50,12 @@ h2 {
     border-color: white;
     border-width: 10px;
 }
-#previousScore{
+#wrongScore{
     width:33%;
     float:left;
 }
 
-#PS{
+#WS{
     color: yellow;
     
     text-align: center;
@@ -77,6 +94,19 @@ h2 {
       width:33%;
       float:left;
 }
+#userscore{
+     text-align: center;
+    padding:73px;
+    font-size: 500%;
+    color: green;
+}
+#badScore{
+     text-align: center;
+    padding:73px;
+    font-size: 500%;
+    color: red;
+}
+
 #CS{
     color: yellow;
     text-align: center;
@@ -88,15 +118,23 @@ h2 {
 }
 #questions{
     width:100%;
-    float: left;
+    /* float: left; */
     background-color:rgba(54, 61, 52, 0.8);
+    text-align: center;
 }
 
-#q1{
-    widows: 100%;
+#question1{
+    width: 100%;
     text-align: center;
     font-size: 30px;
     color:red;
+}
+#answers{
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    color:red;
+    background-color:rgba(54, 61, 52, 0.8);
 }
 
 #gameStart{

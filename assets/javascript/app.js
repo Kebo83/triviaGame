@@ -29,10 +29,10 @@ $(document).ready(function(){
                       ["Álex Rodríguez","Barry Bonds","Mickey Mantle","Miguel Cabrera"],
                       ["Boston Red Sox", "St. Louis Cardinals", "New York Yankees","New York Giants"],
                       ["Cy Young", "Walter Johnson","Nolan Ryan","Greg Maddux"],
-                      ["The Ohio State University", "The University of Alabama", "Notre Dame University", "Penn State Univeristy"],
-                      ["The Univeristy of Alabama", "Mississippi State University","The University of Texas", "Arkansas Univeristy"],
+                      ["The Ohio State University", "The University of Alabama", "Notre Dame University", "Penn State University"],
+                      ["The University of Alabama", "Mississippi State University","The University of Texas", "Arkansas University"],
                       ["Bart Starr", "Joe Namath", "Kenny Stabler", "Brett Farve"],
-                      ["Wayne Gretzky", "Gordie Howe","Brett Hull","JAROMIR JAGR"]
+                      ["Wayne Gretzky", "Gordie Howe","Brett Hull","Jaromir Jagr"],
                       ["Detroit Red Wings","Toronto Maple Leafs:","Chicago Blackhawks","Montreal Canadiens"],
                       ["Patrick Roy","Terry Sawchuk","Martin Brodeur","Jacques Plante"],
                       ["Kobe Bryant","Michael Jordan","Kareem Abdul-Jabbar","LeBron James"],
@@ -50,7 +50,7 @@ $(document).ready(function(){
                          "Miguel Cabrera",
                          "New York Yankees",                         
                          "Cy Young",
-                         "The Univeristy of Alabama",
+                         "The University of Alabama",
                          "The University of Texas",
                          "Brett Farve",
                          "Wayne Gretzky",
@@ -63,111 +63,198 @@ $(document).ready(function(){
                          "Jack Nicklaus",
                          "Brazil",
                         ];
-   var userpick ;
-   var clockRunning = false;
-   var clockrunning;
-   
-   var clock= {
-       t:12000,
-       StartTime: 120000,
-      reset: function () {
-          StartTime:12000,
-          $("#display").html("2:00");
-          // console.log(clock); 
-          },
-       start: function(){
-           if(!clockRunning) {clockRunning= 
-           setInterval(function() {
-            clock.t--;
-          // $("#display").html(clock.t);
-          $("#display").text(clock.count);
-                    
-            if( clock.t<=0){
-             clearInterval( clockRunning);
-              $("#display").html("0:00");
-               //  console.log(clock.StartTime)
-                // console.log(clock.timeConverter());
-                // console.log(clock.count());
-          
-    }}) }
-       },
-   
-  count: function() {
-            clock.start();
-    // DONE: increment time by 1, remember we cant use "this" here.
-    // clock.t--;
+   var userChoice ;
+   var interval;
+   var correct = 0;
+   var wrong = 0;
+   var answerChosen=[];
+   var selectedQanswers=[];
+   var index = Math.floor(Math.random()*questionArray.length);
 
-
-    // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
-    //       and save the result in a variable.
-    var converted = clock.timeConverter(clock.t);
-    
-    // console.log(converted);- THIS WORKS
-
-    // DONE: Use the variable we just created to show the converted time in the "display" div.
-    $("#display").text(converted);
-  },
-  timeConverter: function(t) {
-
-    var minutes = Math.floor(clock.t / 6000);
-    var seconds = Math.floor (clock.t- minutes*60);
-    // clock.t -100 ;
-    // console.log (clock.count()); 
-
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-
-    if (minutes === 0) {
-      minutes = "00";
-    }
-    else if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-
-    return minutes + ":" + seconds;
-  }
-};
-
-//display question and loop though and display possible answers
-function displayQuestion() {
-	//generate random index in array
-	index = Math.floor(Math.random()*questionArray.length);
-	userpick = questionArray[index];
-
-		$("#question1").html("<h2>" + userpick + "</h2>");
-		for(var i = 0; i < index; i++) {
-			var userChoices = 
-      // $("<div>");
-			// userChoice.addClass("answerchoice");
-			userChoice.html(userpick[i]);
-			//assign array position to it so can check answer
-			userChoice.attr("data-guessvalue", i);
-			$("#answers").append(userChoice);
-//		}
-}
-};
-
-function loadQuestion(questionSelection) {
-	console.log(questionSelection);
-	countdownTimer.reset();
-  $(".question").html("<h3>" + questionArray[questionSelection].question + "</h3>");
-  $("#buttonA").text(questionArray[questionSelection].possibleAnswers[0]).show();
-  $("#buttonB").text(questionArray[questionSelection].possibleAnswers[1]).show();
-  $("#buttonC").text(questionArray[questionSelection].possibleAnswers[2]).show();
-  $("#buttonD").text(questionArray[questionSelection].possibleAnswers[3]).show();
-//  getAnswer();  
-//  nextQuestion(index);
-}
-
-     $("#start").on("click", function() {
-        //  setInterval 
-  clock.count ();
+$('#start').click(function () {
+  $('#display').text("1:00");
+  hideButton();
+  countdown();
   displayQuestion();
+  clear();
 
+  console.log(index);
   
+ 
+ 
 });
 
 
-        
-})
+function countdown() {
+  clearInterval(interval);
+  interval = setInterval( function() {
+      var timer = $('#display').html();
+      timer = timer.split(':');
+      var minutes = timer[0];
+      var seconds = timer[1];
+      seconds -= 1;
+      if (minutes < 0) return;
+      else if (seconds < 0 && minutes != 0) {
+          minutes -= 1;
+          seconds = 59;
+      }
+      else if (seconds < 10 && length.seconds != 1) seconds = '0' + seconds;
+
+      $('#display').html(minutes + ':' + seconds);
+
+      if (minutes == 0 && seconds == 0){ clearInterval(interval);
+      timeup();}
+  }, 1000);
+}
+
+function answerCorrect() {
+	correct++;
+  $("#userscore").text(correct);
+	alert("Correct!");
+  displayQuestion();
+	console.log("correct");
+}
+
+function answerWrong() {
+	wrong++;
+  $("#badScore").text(wrong);
+	alert("Incorrect!");
+  displayQuestion();
+	console.log("wrong");
+}
+
+  function hideButton(){$("#start").hide();};
+
+  function timeup(){
+    $("#start").show();
+    $("#question1").html("<h4> TIME IS UP </h4>");
+    $("#buttonA").hide();
+    $("#buttonB").hide();
+    $("#buttonC").hide();
+    $("#buttonD").hide();
+
+  };
+
+  function clear(){
+   $("#buttonA").show();
+    $("#buttonB").show();
+    $("#buttonC").show();
+    $("#buttonD").show();
+    $("#badScore").empty();
+    $("#userscore").empty();
+     correct =0;
+     console.log(correct);
+
+    //  var wrong = 0;
+    //  var answerChosen="";
+    //  var checkAnswer="";
+  };
+
+
+function displayQuestion() {
+	index = Math.floor(Math.random()*questionArray.length);
+for(var i = 0; i <= index; i++)
+	var question = questionArray[index];
+  
+		$("#question1").html("<h2>" + question + "</h2>");
+		// for(var i = 0; i <= index; i++)
+ var selectedQanswers= answerArray[index];
+ var checkAnswer = correctAnswers[index]
+ 
+ console.log(selectedQanswers);
+ console.log(index); 
+
+
+ $("#buttonA").text( selectedQanswers[0] );
+ $("#buttonB").text( selectedQanswers[1] );
+ $("#buttonC").text( selectedQanswers[2] );
+ $("#buttonD").text( selectedQanswers[3] );
+//  var answerChosen = selectedQanswers[0];
+ 
+
+    $(".answerchoice").click(function() {
+      if(this.id == 'buttonA') {
+ 	answerChosen = selectedQanswers[0];
+ } else if(this.id == 'buttonB') {
+ 	answerChosen = selectedQanswers[1];
+ } else if (this.id == 'buttonC') {
+ 	answerChosen = selectedQanswers[2];
+ } else if (this.id == 'buttonD') {
+ 	answerChosen = selectedQanswers[3];
+ } 
+
+       if (answerChosen == checkAnswer){ 
+         answerCorrect();
+        alert("NICE");
+         
+         }
+         else if (answerChosen != checkAnswer){
+         answerWrong();
+        ("NOT NICE")
+console.log (answerChosen);
+ } 
+ 	console.log (answerChosen);
+
+
+    });
+    console.log (answerChosen);
+};
+console.log (answerChosen);
+});
+console.log (answerChosen);
+
+      //  });
+    // });
+    // $("#buttonB").click(function () {
+    //   var userChoice=selectedQanswers[1];
+    //    if (userChoice == correctAnswers[index]){ 
+    //      $("#userscore").text(correct++);
+    //      console.log("Correct");
+    //        $(userChoice).val(null);
+    //      $(index).val(0);
+    //      nextQuestion();
+    //      }
+    //     else{
+    //      $("#badScore").text(wrong++);
+    //      console.log("Wrong");
+    //        $(userChoice).val(0);
+    //      $(index).val(0);
+    //      nextQuestion();
+    //      };
+    // });
+    // $("#buttonC").click(function () {
+    //   var userChoice=selectedQanswers[2];
+    //    if (userChoice == correctAnswers[index]){ 
+    //      $("#userscore").text(correct++);
+    //      console.log("Correct");
+    //        $(userChoice).val(null);
+    //      $(index).val(0);
+    //      nextQuestion();
+    //      }
+    //   else{
+    //      $("#badScore").text(wrong++);
+    //      console.log("Wrong");
+    //       $(userChoice).val(0);
+    //      $(index).val(0);
+    //      nextQuestion();
+    //      };
+    // });
+    // $("#buttonD").click(function () {
+    //   var userChoice=selectedQanswers[3];
+    //    if (userChoice == correctAnswers[index]){ 
+    //      $("#userscore").text(correct++);
+    //      console.log("Correct");
+    //      $(userChoice).val(null);
+    //      $(index).val(0);
+    //      nextQuestion();
+    //      }
+    //     else{
+    //      $("#badScore").text(wrong++);
+    //      console.log("Wrong");
+    //        $(userChoice).val(null);
+    //      $(index).val(0);
+    //      nextQuestion();
+    //      };
+    // });
+
+// };
