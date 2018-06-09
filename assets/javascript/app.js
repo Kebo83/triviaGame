@@ -143,7 +143,7 @@ function answerWrong() {
     correct=0;
      wrong=0; };
 function end() {
-	$('#question1').html("<h4>You have answered all of the questions!! <br> If you any incorrect answers, try again and this time take your time.</h4>");
+	$('#question1').html("<h4>You have answered all of the questions!! <br> If you have any incorrect answers, try again and this time take your time.</h4>");
 	$("#badScore").text( wrong) ;
 	$("#userscore").text(correct );
 	 $("#start").show();
